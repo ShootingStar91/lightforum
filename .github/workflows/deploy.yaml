@@ -23,8 +23,6 @@ jobs:
           script: |
             cd ${{ secrets.VPS_SERVER_FOLDER }}
             git pull
-            pwd # for debugging
-            cat add_last_update # for debugging
-            ./add_last_update
+            ./add_last_updated
             docker compose build
             docker compose up -d
