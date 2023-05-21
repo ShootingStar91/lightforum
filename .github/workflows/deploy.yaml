@@ -24,4 +24,4 @@ jobs:
             cd ${{ secrets.VPS_SERVER_FOLDER }}
             git pull
             docker compose down
-            docker compose up -d
+            docker compose up -d --build
