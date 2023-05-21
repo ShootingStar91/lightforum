@@ -7,7 +7,7 @@ const App = () => {
   return (
     <div className="grid grid-cols-basic">
       <Menu />
-      <div className="main-div">Version 0.04</div>
+      <div className="main-div">Version 0.06</div>
     </div>
   );
 };
