@@ -1,0 +1,4 @@
+git_last_commit_date="$(git log -1 --pretty='format:%cd' --date=format:'%d.%m. %H:%M:%S')"
+echo "VITE_LAST_UPDATED=$git_last_commit_date" > frontend/.env
+current_date_time=$(date +"%d.%m. %T")
+echo "VITE_LAST_DEPLOYED=$current_date_time" >> frontend/.env

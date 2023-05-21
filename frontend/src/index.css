@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 .main-div {
-    @apply bg-sky-50 h-screen border my-8
+    @apply bg-sky-50 border
 }
 
+.link {
+    @apply text-blue-200 underline hover:text-amber-200 font-bold
+}
