@@ -8,10 +8,10 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    if: ${{ !contains(github.event.head_commit.message, '#nodeploy') }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: SSH to VPS and deploy
         uses: appleboy/ssh-action@master
