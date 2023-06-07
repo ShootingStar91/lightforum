@@ -1,2 +1,2 @@
-Online forum, a practice project
+Online forum, a practice project.
 
