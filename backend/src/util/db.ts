@@ -1,5 +1,5 @@
 import { Sequelize } from "sequelize";
-import { DATABASE_URL } from "./config";
+import { DATABASE_URL } from "./config.js";
 console.log(DATABASE_URL);
 const sequelize = new Sequelize(DATABASE_URL);
 

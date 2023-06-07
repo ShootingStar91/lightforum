@@ -1,6 +1,6 @@
 import express from "express";
-import { connectToDatabase } from "./util/db";
-import { PORT } from "./util/config";
+import { connectToDatabase } from "./util/db.js";
+import { PORT } from "./util/config.js";
 
 const app = express();
 
