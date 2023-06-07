@@ -5,7 +5,7 @@ export const Footer = () => {
   return (
     <div className="bg-sky-600 text-slate-100 w-[100%] px-1 italic text-[0.7em] flex justify-between">
         <div className="flex gap-2">
-        <img src="./../../icons/github.svg"></img>
+        <img src="./assets/icons/github.svg"></img>
 
       <table>
         <tr>

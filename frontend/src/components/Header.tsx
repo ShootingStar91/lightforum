@@ -5,7 +5,7 @@ export const Header = () => {
       <HeaderRoute />
       <div className="flex flex-row">
         <div className="my-auto px-4 italic">Logged as User</div>
-        <img className="text-white" src="./../../icons/log-out.svg" alt="Log out"></img>
+        <img className="text-white" src="./assets/icons/log-out.svg" alt="Log out"></img>
       </div>
     </div>
   );
