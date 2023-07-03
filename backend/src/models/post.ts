@@ -20,6 +20,7 @@ Post.init(
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: 'user',
     },
     forum_id: {
       type: DataTypes.INTEGER,
