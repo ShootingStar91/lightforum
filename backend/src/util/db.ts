@@ -8,7 +8,7 @@ import { Umzug, SequelizeStorage } from "umzug";
 const runMigrations = async () => {
   const migrator = new Umzug({
     migrations: {
-      glob: "migrations/*.ts",
+      glob: "src/migrations/*.ts",
     },
     storage: new SequelizeStorage({ sequelize, tableName: "migrations" }),
     context: sequelize.getQueryInterface(),
@@ -25,9 +25,9 @@ const connectToDatabase = async () => {
   try {
     await sequelize.authenticate();
     await runMigrations();
-    console.log("database connected");
+    console.log("Database connected");
   } catch (err) {
-    console.log("connecting database failed", { err });
+    console.log("Connecting database failed", { err });
     return process.exit(1);
   }
 

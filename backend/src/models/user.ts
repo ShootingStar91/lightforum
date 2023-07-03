@@ -1,39 +1,32 @@
 import { Model, DataTypes } from "sequelize";
 import { sequelize } from "../util/db";
 
-class Post extends Model {}
+class User extends Model {}
 
-Post.init(
+User.init(
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    title: {
+    username: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    content: {
+    password_hash: {
       type: DataTypes.TEXT,
-    },
-    user_id: {
-      type: DataTypes.INTEGER,
       allowNull: false,
     },
-    forum_id: {
-      type: DataTypes.INTEGER,
-      references: 'forum',
-    }
   },
   {
     sequelize,
     underscored: true,
     timestamps: true,
-    modelName: "post",
+    modelName: "user",
   }
 );
 
-Post.sync()
+User.sync()
 
-export default Post;
+export default User;

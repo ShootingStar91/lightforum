@@ -1,9 +1,9 @@
 import { Model, DataTypes } from "sequelize";
 import { sequelize } from "../util/db";
 
-class Post extends Model {}
+class Forum extends Model {}
 
-Post.init(
+Forum.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -14,26 +14,19 @@ Post.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    content: {
+    description: {
       type: DataTypes.TEXT,
+      allowNull: true,
     },
-    user_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
-    forum_id: {
-      type: DataTypes.INTEGER,
-      references: 'forum',
-    }
   },
   {
     sequelize,
     underscored: true,
     timestamps: true,
-    modelName: "post",
+    modelName: "forum",
   }
 );
 
-Post.sync()
+Forum.sync()
 
-export default Post;
+export default Forum;

@@ -5,6 +5,7 @@ services:
     volumes:
       - ./backend/database/:/var/lib/postgresql/data
     environment:
+      - POSTGRES_DB=lf-db
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     ports:
@@ -15,6 +16,8 @@ services:
       - lf-db
     volumes:
       - ./backend/:/usr/src/app
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@lf-db:5432/lf-db
     container_name: lf-backend-dev
     ports:
       - 3001:3001
