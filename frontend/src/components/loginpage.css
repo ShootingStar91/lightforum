@@ -1,0 +1,13 @@
+
+
+input {
+    @apply p-4 w-96 focus:outline-none text-center
+}
+
+button {
+    @apply p-4 bg-blue-700 bg-sky-600 text-white w-64 font-bold
+}
+
+.link {
+    @apply underline text-sky-600 font-bold
+}

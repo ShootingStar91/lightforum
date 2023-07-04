@@ -1,3 +1,4 @@
+import { Link, useLocation } from "react-router-dom";
 
 export const Header = () => {
   return (
@@ -5,14 +6,29 @@ export const Header = () => {
       <HeaderRoute />
       <div className="flex flex-row">
         <div className="my-auto px-4 italic">Logged as User</div>
-        <img className="text-white" src="./assets/icons/log-out.svg" alt="Log out"></img>
+        <img
+          onClick={() => console.log("logout")}
+          className="text-white"
+          src="./assets/icons/log-out.svg"
+          alt="Log out"
+        ></img>
       </div>
     </div>
   );
 };
 
 const HeaderRoute = () => {
+  const location = useLocation();
   return (
-    <div className="my-auto pl-2">Lightforum / Category / Topic title</div>
+    <div className="my-auto pl-2 font-bold">
+      <Link to="/">Lightforum</Link>{" "}
+      {location.pathname !== "/" && (
+        <>
+          {" "}
+          &gt; <Link to="/forum">Category</Link>
+        </>
+      )}
+      {!['/', '/forum'].includes(location.pathname) && <> &gt; Topic title</>}
+    </div>
   );
 };
