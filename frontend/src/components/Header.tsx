@@ -9,7 +9,7 @@ export const Header = () => {
         <img
           onClick={() => console.log("logout")}
           className="text-white"
-          src="./assets/icons/log-out.svg"
+          src="/assets/icons/log-out.svg"
           alt="Log out"
         ></img>
       </div>
@@ -28,7 +28,7 @@ const HeaderRoute = () => {
           &gt; <Link to="/forum">Category</Link>
         </>
       )}
-      {!['/', '/forum'].includes(location.pathname) && <> &gt; Topic title</>}
+      {location.pathname.startsWith('/topic/') && <> &gt; Topic title</>}
     </div>
   );
 };
