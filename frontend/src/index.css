@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .main-div {
-    @apply bg-sky-50 border
+    @apply bg-gradient-to-b from-sky-100 to-white
 }
 
 .link {

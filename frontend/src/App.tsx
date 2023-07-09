@@ -1,6 +1,5 @@
 import "./index.css";
 import "./basic.css";
-import { Footer } from "./components/Footer";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { LoginPage } from "./components/LoginPage";
 import { Header } from "./components/Header";
@@ -25,7 +24,6 @@ const App = () => {
               <Route path="/login" element={<LoginPage />} />
             </Routes>
           </div>
-          <Footer />
         </div>
       </div>
     </Router>

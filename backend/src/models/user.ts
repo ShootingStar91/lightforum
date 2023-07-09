@@ -22,11 +22,9 @@ User.init(
   {
     sequelize,
     underscored: true,
-    timestamps: true,
     modelName: "user",
+    timestamps: true,
   }
 );
-
-User.sync()
 
 export default User;

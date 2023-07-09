@@ -2,7 +2,9 @@ import { Model, DataTypes } from "sequelize";
 import { sequelize } from "../util/db";
 
 class Post extends Model {}
-
+/** parent_id: if null, this is a topic.
+ * If defined, this is a response to that topic.
+ */
 Post.init(
   {
     id: {
@@ -20,21 +22,24 @@ Post.init(
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: 'user',
+      references: 'users',
     },
     forum_id: {
       type: DataTypes.INTEGER,
-      references: 'forum',
+      references: 'forums',
+    },
+    parent_id: {
+      type: DataTypes.INTEGER,
+      references: 'posts',
+      allowNull: true,
     }
   },
   {
     sequelize,
     underscored: true,
+    modelName: "posts",
     timestamps: true,
-    modelName: "post",
   }
 );
-
-Post.sync()
 
 export default Post;

@@ -28,9 +28,12 @@ const getTimeStamp = () =>
 export const TopicView = () => {
   return (
     <div className="mx-auto w-[80%]">
-      {posts.map((post) =>
-        post.title ? <Post post={post} /> : <Comment post={post} />
-      )}
+      <Post post={posts[0]} />
+      <div className="bg-gradient-to-b from-sky-200 to-white mt-6">
+        {posts.slice(1).map((post) => (
+          <Comment post={post} />
+        ))}
+      </div>
     </div>
   );
 };
@@ -40,9 +43,7 @@ const Post = ({ post }: { post: any }) => {
     <div className="bg-sky-200 mt-16">
       <div className="relative text-white bg-sky-400 flex p-2 pl-8">
         <div className="font-bold">{post.title}</div>
-        <div className="absolute pr-4 right-0">
-          {getTimeStamp()}
-        </div>
+        <div className="absolute pr-4 right-0">{getTimeStamp()}</div>
       </div>
       <p className="p-8">{post.content}</p>
       <div className="font-bold text-slate-500 pl-8 pb-4 ">{post.user}</div>
@@ -52,7 +53,7 @@ const Post = ({ post }: { post: any }) => {
 
 const Comment = ({ post }: { post: any }) => {
   return (
-    <div className="bg-sky-100 py-6">
+    <div className="py-6">
       <p className="p-8">{post.content}</p>
       <div className="relative font-bold text-slate-500 pl-8 flex">
         <div>{post.user}</div>

@@ -16,6 +16,8 @@ module.exports = {
         type: DataTypes.TEXT,
         allowNull: true,
       },
+      created_at: DataTypes.DATE,
+      updated_at: DataTypes.DATE,
     });
     await queryInterface.createTable("users", {
       id: {
@@ -31,6 +33,8 @@ module.exports = {
         type: DataTypes.TEXT,
         allowNull: false,
       },
+      created_at: DataTypes.DATE,
+      updated_at: DataTypes.DATE,
     });
     await queryInterface.createTable("posts", {
         id: {
@@ -54,6 +58,8 @@ module.exports = {
           type: DataTypes.INTEGER,
           references: { model: "forums", key: "id" },
         },
+        created_at: DataTypes.DATE,
+        updated_at: DataTypes.DATE,
       });
 },
   down: async ({ context: queryInterface }: { context: QueryInterface }) => {

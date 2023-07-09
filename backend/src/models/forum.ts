@@ -22,11 +22,9 @@ Forum.init(
   {
     sequelize,
     underscored: true,
-    timestamps: true,
     modelName: "forum",
+    timestamps: true,
   }
 );
-
-Forum.sync()
 
 export default Forum;
