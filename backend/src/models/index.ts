@@ -4,3 +4,5 @@ import User from "./user";
 
 Post.belongsTo(User);
 Post.belongsTo(Forum);
+
+export { Post, Forum, User }

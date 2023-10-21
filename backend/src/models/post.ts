@@ -32,14 +32,14 @@ Post.init(
       type: DataTypes.INTEGER,
       references: 'posts',
       allowNull: true,
-    }
+    },
   },
   {
     sequelize,
     underscored: true,
     modelName: "posts",
     timestamps: true,
-  }
+  },
 );
 
 export default Post;
