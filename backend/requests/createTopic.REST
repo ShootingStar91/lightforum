@@ -2,8 +2,8 @@ POST http://localhost:3001/posts/new_topic
 Content-Type: application/json
 
 {
-    "title": "Eka topicci",
-    "content": "Lorem ipsum dolor sit amet.",
-    "userId": 1,
-    "forumId": 1
+    "content": "Eka vastaus.",
+    "userId": 2,
+    "forumId": 1,
+    "parentId": 3
 }

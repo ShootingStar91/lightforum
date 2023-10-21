@@ -1,7 +1,11 @@
-import { Model, DataTypes } from "sequelize";
+import { Model, DataTypes, InferAttributes, InferCreationAttributes } from "sequelize";
 import { sequelize } from "../util/db";
 
-class Forum extends Model {}
+class Forum extends Model<InferAttributes<Forum>, InferCreationAttributes<Forum>> {
+  id!: number;
+  title!: string;
+  description!: string | null;
+}
 
 Forum.init(
   {

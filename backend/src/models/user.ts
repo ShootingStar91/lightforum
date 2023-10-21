@@ -1,7 +1,18 @@
-import { Model, DataTypes } from "sequelize";
+import {
+  Model,
+  DataTypes,
+  InferAttributes,
+  InferCreationAttributes,
+} from "sequelize";
 import { sequelize } from "../util/db";
 
-class User extends Model {}
+class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
+  id!: number;
+  username!: string;
+  password_hash!: string;
+  createdAt!: Date;
+  updatedAt!: Date;
+}
 
 User.init(
   {
@@ -18,6 +29,8 @@ User.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    createdAt: DataTypes.DATE,
+    updatedAt: DataTypes.DATE,
   },
   {
     sequelize,

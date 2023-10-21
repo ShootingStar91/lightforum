@@ -2,6 +2,6 @@ POST http://localhost:3001/users/create
 content-type: application/json
 
 {
-    "username": "user123",
-    "password": "pass123"
+    "username": "user2",
+    "password": "pass2"
 }

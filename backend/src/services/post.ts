@@ -1,26 +1,12 @@
 import { Forum } from "../models/";
 import { Post } from "../models/";
 
-type ForumType = {
-  id: number,
-  title: string,
-  description: string,
-}
-
-type PostType = {
-  id: number,
-  title: string,
-  content: string,
-  parentId: number,
-  forumId: number,
-}
-
 export const createPost = async (
   userId: number,
   topicId: number,
-  content: string
+  content: string,
 ) => {
-  const newPost = await Post.create({ userId, topicId, content });
+  const newPost = await Post.create({ userId, parentId: topicId, content } as Post);
   return newPost;
 };
 
@@ -31,11 +17,11 @@ export const createTopic = async (
   content: string
 ) => {
   const newTopic = await Post.create({
-    user_id: userId,
-    forum_id: forumId,
+    userId,
+    forumId,
     title,
     content,
-  });
+  } as Post);
   return newTopic;
 };
 
@@ -51,14 +37,17 @@ export const getTopic = async (topicId: number) => {
 export const getTopics = async () => {
   const posts = await Post.findAll({
     attributes: ["id", "title", "forum_id"],
-    where: { parent_id: null },
+    where: { parentId: null },
     raw: true,
     mapToModel: true,
   });
-  const forums = await Forum.findAll<Forum>({ raw: true, mapToModel: true });
-  console.log({ posts, forums });
+  const forums = await Forum.findAll({
+    raw: true,
+    mapToModel: true,
+  });
+
   return forums.map((f) => ({
     ...f,
-    posts: posts.filter((p) => p.dataValues.forumId === f.dataValues.id),
+    posts: posts.filter((p) => p.forumId === f.id),
   }));
 };
