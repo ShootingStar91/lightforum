@@ -1,7 +1,7 @@
 import { User } from "../models/index.js";
 
 export const createUser = async (username: string, password: string) => {
-  const result = await User.create({ username, password_hash: password } as User);
+  const result = await User.create({ username, password_hash: password });
   return result;
 };
 
