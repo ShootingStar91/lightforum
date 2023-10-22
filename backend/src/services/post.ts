@@ -1,11 +1,25 @@
 import { Post, Forum } from "../models/index.js";
 
+const findTopic = async (topicId: number) => {
+  const topic = await Post.findOne({ where: { parentId: topicId } });
+  return topic;
+};
+
 export const createPost = async (
   userId: number,
   topicId: number,
-  content: string,
+  content: string
 ) => {
-  const newPost = await Post.create({ userId, parentId: topicId, content } as Post);
+  const topic = await findTopic(topicId);
+  if (!topic) {
+    return null;
+  }
+  const newPost = await Post.create({
+    userId,
+    parentId: topicId,
+    content,
+    forumId: topic.forumId,
+  });
   return newPost;
 };
 
@@ -20,7 +34,7 @@ export const createTopic = async (
     forumId,
     title,
     content,
-  } as Post);
+  });
   return newTopic;
 };
 

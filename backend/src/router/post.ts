@@ -15,7 +15,8 @@ router.post("/new", async (req: Request<object, object, PostFields>, res) => {
   const content = req.body.content;
   const topicId = req.body.topicId as number;
   const result = await createPost(req.user.id, topicId, content);
-  res.json(result);
+  if (!result) return res.status(400).send();
+  return res.json(result);
 });
 
 // Create new topic

@@ -9,7 +9,7 @@ type ForumFields = { title: string, description: string };
 router.post("/new", async (req: Request<object, object, ForumFields>, res) => {
   const title = req.body.title;
   const description = req.body.description;
-  const forum = await Forum.create({ title, description } as Forum);
+  const forum = await Forum.create({ title, description });
   res.status(200).json(forum);
 });
 
@@ -17,7 +17,7 @@ router.put("/edit/:id", async (req: Request<object, object, ForumFields>, res) =
   const title = req.body.title;
   const description = req.body.description;
   const id = parseInt(req.query.id as string);
-  await Forum.update({ title, description } as Forum, { where: { id: id } });
+  await Forum.update({ title, description }, { where: { id: id } });
   res.status(200).send();
 });
 

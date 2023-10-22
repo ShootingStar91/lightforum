@@ -3,18 +3,19 @@ import {
   DataTypes,
   InferAttributes,
   InferCreationAttributes,
+  CreationOptional,
 } from "sequelize";
 import { sequelize } from "../util/db.js";
 
 class Post extends Model<InferAttributes<Post>, InferCreationAttributes<Post>> {
-  id!: number;
+  id!: CreationOptional<number>;
   title!: string | null;
   content!: string;
   userId!: number;
   forumId!: number;
   parentId!: number | null;
-  createdAt!: Date;
-  updatedAt!: Date;
+  createdAt!: CreationOptional<Date>;
+  updatedAt!: CreationOptional<Date>;
 }
 
 Post.init(
