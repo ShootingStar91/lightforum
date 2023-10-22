@@ -1,6 +1,5 @@
 import { Router, Request } from "express";
 import { createPost, createTopic, getTopic, getTopics } from "../services/post.js";
-import "express-async-errors";
 
 const router = Router();
 

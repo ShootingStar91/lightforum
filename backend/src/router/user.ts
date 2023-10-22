@@ -3,7 +3,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { Router } from "express";
 import { createUser, tryLogin } from "../services/user.js";
-import 'express-async-errors';
 
 const router = Router();
 
