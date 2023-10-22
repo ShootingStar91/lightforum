@@ -4,7 +4,7 @@ import {
   InferAttributes,
   InferCreationAttributes,
 } from "sequelize";
-import { sequelize } from "../util/db";
+import { sequelize } from "../util/db.js";
 
 class Post extends Model<InferAttributes<Post>, InferCreationAttributes<Post>> {
   id!: number;

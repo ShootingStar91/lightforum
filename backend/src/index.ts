@@ -4,8 +4,9 @@ import { PORT } from "./util/config.js";
 import userRouter from "./router/user.js";
 import { logger, userExtractor } from "./util/middleware.js";
 import postRouter from "./router/post.js";
+import forumRouter from "./router/forum.js";
 
-const errorHandler = async (
+const errorHandler = (
   error: Error,
   _req: express.Request,
   res: express.Response,
@@ -20,6 +21,7 @@ app.use(logger);
 app.use(userExtractor);
 app.use("/users", userRouter);
 app.use("/posts", postRouter);
+app.use("forums", forumRouter);
 app.get("/", (_req, res) => {
   res.send("Hello world");
 });
@@ -33,4 +35,4 @@ const start = async () => {
   });
 };
 
-start();
+void start();

@@ -1,5 +1,5 @@
 import { Model, DataTypes, InferAttributes, InferCreationAttributes } from "sequelize";
-import { sequelize } from "../util/db";
+import { sequelize } from "../util/db.js";
 
 class Forum extends Model<InferAttributes<Forum>, InferCreationAttributes<Forum>> {
   id!: number;

@@ -1,5 +1,4 @@
-import { Forum } from "../models/";
-import { Post } from "../models/";
+import { Post, Forum } from "../models/index.js";
 
 export const createPost = async (
   userId: number,

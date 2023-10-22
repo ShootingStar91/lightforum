@@ -1,12 +1,11 @@
-import { User } from "../models";
+import { User } from "../models/index.js";
 
 export const createUser = async (username: string, password: string) => {
-  console.log({username, password})
-  const result = await User.create({ username, password_hash: password });
+  const result = await User.create({ username, password_hash: password } as User);
   return result;
 };
 
 export const tryLogin = async (username: string, password: string) => {
-  const foundUser = await User.findOne({ where: { username, password } });
+  const foundUser = await User.findOne({ where: { username, password_hash: password } });
   return foundUser;
 };
