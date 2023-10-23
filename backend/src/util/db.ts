@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 import { DATABASE_URL } from "./config.js";
-console.log(DATABASE_URL);
+console.log({ DATABASE_URL });
 const sequelize = new Sequelize(DATABASE_URL);
 
 import { Umzug, SequelizeStorage } from "umzug";
@@ -8,7 +8,7 @@ import { Umzug, SequelizeStorage } from "umzug";
 const runMigrations = async () => {
   const migrator = new Umzug({
     migrations: {
-      glob: "src/migrations/*.ts",
+      glob: "src/migrations/*.js",
     },
     storage: new SequelizeStorage({ sequelize, tableName: "migrations" }),
     context: sequelize.getQueryInterface(),

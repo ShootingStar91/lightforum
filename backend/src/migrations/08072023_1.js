@@ -1,6 +1,6 @@
-import { DataTypes, QueryInterface } from "sequelize";
+const { DataTypes } = require("sequelize")
 
-export default {
+module.exports = {
   up: async ({ context: queryInterface }) => {
     await queryInterface.addColumn("posts", "parent_id", {
       type: DataTypes.INTEGER,
