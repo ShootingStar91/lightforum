@@ -1,4 +1,4 @@
-import { Post, Forum } from "../models/index.js";
+import { Post } from "../models/index.js";
 
 const findTopic = async (topicId: number) => {
   const topic = await Post.findOne({ where: { parentId: topicId } });
@@ -49,18 +49,7 @@ export const getTopic = async (topicId: number) => {
 
 export const getTopics = async () => {
   const posts = await Post.findAll({
-    attributes: ["id", "title", "forum_id"],
     where: { parentId: null },
-    raw: true,
-    mapToModel: true,
   });
-  const forums = await Forum.findAll({
-    raw: true,
-    mapToModel: true,
-  });
-
-  return forums.map((f) => ({
-    ...f,
-    posts: posts.filter((p) => p.forumId === f.id),
-  }));
+  return posts;
 };
