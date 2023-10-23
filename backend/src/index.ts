@@ -5,7 +5,7 @@ import userRouter from "./router/user.js";
 import { logger, userExtractor } from "./util/middleware.js";
 import postRouter from "./router/post.js";
 import forumRouter from "./router/forum.js";
-import 'express-async-errors';
+import "express-async-errors";
 
 const errorHandler = (
   error: Error,
@@ -38,3 +38,5 @@ const start = async () => {
 };
 
 void start();
+
+export { app };

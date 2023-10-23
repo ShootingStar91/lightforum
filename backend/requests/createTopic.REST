@@ -4,5 +4,6 @@ Content-Type: application/json
 {
     "userId": 2,
     "forumId": 1,
-    "parentId": 3
+    "title": "Eka topic",
+    "content": "Moi!"
 }

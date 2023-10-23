@@ -40,10 +40,17 @@ export const bodyValidator =
     return next();
   };
 
-  export const queryIdValidator =
-  (req: Request, res: Response, next: NextFunction) => {
-    if (req.query?.id && typeof req.query.id === 'string' && !isNaN(parseInt(req.query.id ))) {
-      return next();
-    }
-    return res.status(400).json({ message: "Invalid id"} );
-  };
+export const queryIdValidator = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  if (
+    req.query?.id &&
+    typeof req.query.id === "string" &&
+    !isNaN(parseInt(req.query.id))
+  ) {
+    return next();
+  }
+  return res.status(400).json({ message: "Invalid id" });
+};

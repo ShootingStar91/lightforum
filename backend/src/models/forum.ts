@@ -1,7 +1,16 @@
-import { Model, DataTypes, InferAttributes, InferCreationAttributes, CreationOptional } from "sequelize";
+import {
+  Model,
+  DataTypes,
+  InferAttributes,
+  InferCreationAttributes,
+  CreationOptional,
+} from "sequelize";
 import { sequelize } from "../util/db.js";
 
-class Forum extends Model<InferAttributes<Forum>, InferCreationAttributes<Forum>> {
+class Forum extends Model<
+  InferAttributes<Forum>,
+  InferCreationAttributes<Forum>
+> {
   id!: CreationOptional<number>;
   title!: string;
   description!: string | null;
@@ -26,7 +35,7 @@ Forum.init(
     },
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
-    },
+  },
   {
     sequelize,
     underscored: true,

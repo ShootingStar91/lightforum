@@ -6,6 +6,8 @@ export const createUser = async (username: string, password: string) => {
 };
 
 export const tryLogin = async (username: string, password: string) => {
-  const foundUser = await User.findOne({ where: { username, password_hash: password } });
+  const foundUser = await User.findOne({
+    where: { username, password_hash: password },
+  });
   return foundUser;
 };

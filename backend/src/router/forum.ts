@@ -36,14 +36,10 @@ router.put(
   }
 );
 
-router.delete(
-  "/delete/:id",
-  queryIdValidator,
-  async (req, res) => {
-    const id = parseInt(req.query.id as string);
-    await Forum.destroy({ where: { id } });
-    return res.status(200).send();
-  }
-);
+router.delete("/delete/:id", queryIdValidator, async (req, res) => {
+  const id = parseInt(req.query.id as string);
+  await Forum.destroy({ where: { id } });
+  return res.status(200).send();
+});
 
 export default router;

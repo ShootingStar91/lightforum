@@ -3,7 +3,7 @@ import {
   DataTypes,
   InferAttributes,
   InferCreationAttributes,
-  CreationOptional
+  CreationOptional,
 } from "sequelize";
 import { sequelize } from "../util/db.js";
 
