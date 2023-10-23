@@ -7,34 +7,29 @@ import {
 } from "sequelize";
 import { sequelize } from "../util/db.js";
 
-class Post extends Model<InferAttributes<Post>, InferCreationAttributes<Post>> {
+class Thread extends Model<InferAttributes<Thread>, InferCreationAttributes<Thread>> {
   id!: CreationOptional<number>;
-  content!: string;
+  title!: string;
   userId!: number;
-  threadId!: number | null;
   createdAt!: CreationOptional<Date>;
   updatedAt!: CreationOptional<Date>;
 }
 
-Post.init(
+Thread.init(
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    content: {
+    title: {
       type: DataTypes.TEXT,
+      allowNull: false,
     },
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: "users",
-    },
-    threadId: {
-      type: DataTypes.INTEGER,
-      references: "threads",
-      allowNull: false,
     },
     createdAt: DataTypes.DATE,
     updatedAt: DataTypes.DATE,
@@ -42,9 +37,9 @@ Post.init(
   {
     sequelize,
     underscored: true,
-    modelName: "posts",
+    modelName: "threads",
     timestamps: true,
   }
 );
 
-export default Post;
+export default Thread;
