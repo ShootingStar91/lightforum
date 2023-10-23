@@ -44,17 +44,4 @@ describe("Test post API", () => {
       expect(data[index]).toMatchObject(thread)
     );
   });
-
-  test("Topic creation works", async () => {
-    const mock_topic = {
-      title: "Mock topic 1",
-      content: "Mock topic content",
-      forum_id: "1",
-      user_id: "1",
-    };
-    const response = await api.post("/posts/new_topic").send(mock_topic);
-    expect(response.statusCode).toBe(200);
-    const topicsResponse = await api.get("/posts/topic");
-    expect(topicsResponse.statusCode).toBe(200);
-  });
 });

@@ -17,6 +17,16 @@ declare module "express-serve-static-core" {
   }
 }
 
+export const errorHandler = (
+  error: Error,
+  _req: express.Request,
+  res: express.Response,
+  _next: express.NextFunction
+) => {
+  res.status(500).json("Internal server error:" + error);
+};
+
+
 export const logger: Middleware = (req, _res, next) => {
   console.log(req.method + " " + req.url);
   if (req.body) console.log("Body: ", req.body);

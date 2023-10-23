@@ -1,19 +1,10 @@
 import express from "express";
 import "express-async-errors";
 import userRouter from "./router/user.js";
-import { logger, userExtractor } from "./util/middleware.js";
+import { errorHandler, logger, userExtractor } from "./util/middleware.js";
 import postRouter from "./router/post.js";
 import forumRouter from "./router/forum.js";
 import threadRouter from "./router/thread.js";
-
-const errorHandler = (
-  error: Error,
-  _req: express.Request,
-  res: express.Response,
-  _next: express.NextFunction
-) => {
-  res.json("Internal server error:" + error);
-};
 
 const app = express();
 

@@ -9,7 +9,7 @@ const router = Router();
 //   forumId: number;
 // };
 
-// Get single topic and it's posts
+// Get single thread and it's posts
 // router.get("/:id", queryIdValidator, async (req, res) => {
 //   const topicId = parseInt(req.query.id as string);
 //   const result = await getFullTopic(topicId);
@@ -19,16 +19,16 @@ const router = Router();
 //   return res.status(404).send();
 // });
 
-// Get all topics (without posts)
+// Get all threads (without posts)
 router.get("/", async (_req, res) => {
   const threads = await getAllThreads();
   return res.status(200).json(threads);
 });
 
-// Create topic
+// Create thread
 
-// Edit topic (title or forumId)
+// Edit thread (title or forumId)
 
-// Delete topic
+// Delete thread
 
 export default router;

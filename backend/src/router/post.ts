@@ -1,53 +1,27 @@
 import { Router, Request } from "express";
 import {
   createPost,
-  createTopic,
-  getTopic,
-  getTopics,
 } from "../services/post.js";
+import { z } from "zod";
+import { bodyValidator } from "../util/middleware.js";
 
 const router = Router();
 
-type PostFields = {
-  content: string;
-  title: string | undefined;
-  topicId: number | undefined;
-  forumId: number;
-};
-
-// Answer to an existing topic
-router.post("/new", async (req: Request<object, object, PostFields>, res) => {
-  const content = req.body.content;
-  const topicId = req.body.topicId as number;
-  const result = await createPost(req.user.id, topicId, content);
-  if (!result) return res.status(400).send();
-  return res.json(result);
+const PostSchema = z.object({
+  content: z.string().min(2, "Content too short"),
+  userId: z.string().min(1, "User id must be defined"),
+  threadId: z.string().min(1, "Thread id must be defined"),
 });
 
-// Create new topic
-router.post(
-  "/new_topic",
-  async (req: Request<object, object, PostFields>, res) => {
-    const forumId = req.body.forumId;
-    const content = req.body.content;
-    const title = req.body.title as string;
-    const result = await createTopic(req.user.id, forumId, title, content);
-    res.json(result);
-  }
-);
+type PostFields = z.infer<typeof PostSchema>;
 
-router.get(
-  "/topic/:topicId",
-  async (req: Request<{ topicId: string }, object, PostFields>, res) => {
-    const topicId = parseInt(req.params.topicId);
-    const result = await getTopic(topicId);
-    res.json(result);
-  }
-);
-
-router.get("/topic", async (_req, res) => {
-  const topics = await getTopics();
-  res.json(topics);
+// Post = response to a thread
+router.post("/new", bodyValidator(PostSchema), async (req: Request<object, object, PostFields>, res) => {
+  const content = req.body.content;
+  const threadId = parseInt(req.body.threadId);
+  const result = await createPost(req.user.id, threadId, content);
+  if (!result) return res.status(400).send();
+  return res.json(result);
 });
 
 export default router;
