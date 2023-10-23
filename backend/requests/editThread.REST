@@ -1,0 +1,9 @@
+PUT http://localhost:3001/threads/1
+Content-Type: application/json
+
+{
+    "userId": 1,
+    "forumId": 1,
+    "title": "Eka thread MUOKATTU",
+    "content": "Moi!"
+}

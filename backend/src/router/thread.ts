@@ -2,6 +2,7 @@ import { Request, Router } from "express";
 import { createThread, getAllThreads } from "../services/thread.js";
 import { z } from "zod";
 import { bodyValidator } from "../util/middleware.js";
+import Thread from "../models/thread.js";
 
 const router = Router();
 
@@ -44,6 +45,20 @@ router.post(
 );
 
 // Edit thread (title or forumId)
+router.put(
+  "/:id",
+  bodyValidator(ThreadSchema),
+  async (req: Request<{id: string}, object, ThreadFields>, res) => {
+    console.log({id: req.params.id });
+    const id = parseInt(req.params.id);
+    const { title, content } = req.body;
+    const result = await Thread.update({ title, content }, { where: { id } });
+    if (result) {
+      return res.status(200).json(result);
+    }
+    return res.status(400).send();
+  }
+);
 
 // Delete thread
 
