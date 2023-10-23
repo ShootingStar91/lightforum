@@ -42,9 +42,9 @@ export const bodyValidator =
   (schema: z.AnyZodObject | z.ZodOptional<z.AnyZodObject>) =>
   (req: Request, res: Response, next: NextFunction) => {
     console.log("Body: ", req.body);
-    const err = schema.safeParse(req.body);
-    if (err) {
-      return res.status(400).json(err);
+    const parsed = schema.safeParse(req.body);
+    if (!parsed.success) {
+      return res.status(400).json(parsed.error);
     }
     console.log("Parse ok");
     return next();

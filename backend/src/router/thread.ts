@@ -1,13 +1,18 @@
-import { Router } from "express";
-import { getAllThreads } from "../services/thread.js";
+import { Request, Router } from "express";
+import { createThread, getAllThreads } from "../services/thread.js";
+import { z } from "zod";
+import { bodyValidator } from "../util/middleware.js";
 
 const router = Router();
 
-// type ThreadFields = {
-//   title: string | undefined;
-//   userId: number | undefined;
-//   forumId: number;
-// };
+const ThreadSchema = z.object({
+  title: z.string().min(2, "Title too short"),
+  content: z.string(),
+  forumId: z.number(),
+  userId: z.number(),
+});
+
+export type ThreadFields = z.infer<typeof ThreadSchema>;
 
 // Get single thread and it's posts
 // router.get("/:id", queryIdValidator, async (req, res) => {
@@ -26,6 +31,17 @@ router.get("/", async (_req, res) => {
 });
 
 // Create thread
+router.post(
+  "/",
+  bodyValidator(ThreadSchema),
+  async (req: Request<object, object, ThreadFields>, res) => {
+    const { title, content, forumId, userId } = req.body;
+    const result = await createThread({ title, content, forumId, userId });
+    console.log({ result });
+    if (result) return res.status(200).json(result);
+    return res.status(400).send();
+  }
+);
 
 // Edit thread (title or forumId)
 

@@ -1,9 +1,0 @@
-POST http://localhost:3001/posts/new
-Content-Type: application/json
-
-{
-    "userId": 2,
-    "forumId": 1,
-    "title": "Eka topic",
-    "content": "Moi!"
-}

@@ -1,0 +1,9 @@
+POST http://localhost:3001/threads/
+Content-Type: application/json
+
+{
+    "userId": 1,
+    "forumId": 1,
+    "title": "Eka thread",
+    "content": "Moi!"
+}
