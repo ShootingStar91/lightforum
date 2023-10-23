@@ -11,7 +11,7 @@ class Post extends Model<InferAttributes<Post>, InferCreationAttributes<Post>> {
   id!: CreationOptional<number>;
   content!: string;
   userId!: number;
-  threadId!: number | null;
+  threadId!: number;
   createdAt!: CreationOptional<Date>;
   updatedAt!: CreationOptional<Date>;
 }

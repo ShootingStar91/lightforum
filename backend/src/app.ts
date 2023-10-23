@@ -4,6 +4,7 @@ import userRouter from "./router/user.js";
 import { logger, userExtractor } from "./util/middleware.js";
 import postRouter from "./router/post.js";
 import forumRouter from "./router/forum.js";
+import threadRouter from "./router/thread.js";
 
 const errorHandler = (
   error: Error,
@@ -21,7 +22,8 @@ app.use(logger);
 app.use(userExtractor);
 app.use("/users", userRouter);
 app.use("/posts", postRouter);
-app.use("forums", forumRouter);
+app.use("/forums", forumRouter);
+app.use("/threads", threadRouter);
 app.get("/", (_req, res) => {
   res.send("Hello world");
 });

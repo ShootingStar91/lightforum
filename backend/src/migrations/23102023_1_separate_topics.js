@@ -14,10 +14,19 @@ module.exports = {
         type: DataTypes.TEXT,
         allowNull: false,
       },
+      content: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
       user_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         references: { model: "users", key: "id" },
+      },
+      forum_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references: { model: "forums", key: "id" },
       },
       created_at: DataTypes.DATE,
       updated_at: DataTypes.DATE,

@@ -5,7 +5,7 @@ export const testData = {
       description: "General discussion about testing, obviously!",
     },
   ],
-  posts: [
+  threads: [
     {
       title: "Test topic 1",
       content: "First test topic. Testing is fun!",
@@ -23,12 +23,11 @@ export const testData = {
       password_hash: "testPass2",
     }
   ],
-  responses: [
+  posts: [
     {
       title: "Test response 1",
       content: "Hi there, I agree.",
-      forumId: 1,
-      parentId: 1,
+      threadId: 1,
       userId: 2,
     },
   ],
