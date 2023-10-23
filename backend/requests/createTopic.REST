@@ -1,8 +1,7 @@
-POST http://localhost:3001/posts/new_topic
+POST http://localhost:3001/posts/new
 Content-Type: application/json
 
 {
-    "content": "Eka vastaus.",
     "userId": 2,
     "forumId": 1,
     "parentId": 3
