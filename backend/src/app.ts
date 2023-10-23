@@ -1,9 +1,9 @@
 import express from "express";
+import "express-async-errors";
 import userRouter from "./router/user.js";
 import { logger, userExtractor } from "./util/middleware.js";
 import postRouter from "./router/post.js";
 import forumRouter from "./router/forum.js";
-import "express-async-errors";
 
 const errorHandler = (
   error: Error,
