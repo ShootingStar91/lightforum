@@ -1,9 +1,12 @@
 import { Sequelize } from "sequelize";
-import { DATABASE_URL } from "./config.js";
-console.log({ DATABASE_URL });
-const sequelize = new Sequelize(DATABASE_URL);
-
+import { IS_TEST, DATABASE_URL, TEST_DATABASE_URL } from "./config.js";
 import { Umzug, SequelizeStorage } from "umzug";
+
+const db_url = IS_TEST ? TEST_DATABASE_URL : DATABASE_URL;
+
+console.log("Connecting to database url: " + db_url);
+
+const sequelize = new Sequelize(db_url);
 
 const runMigrations = async () => {
   const migrator = new Umzug({

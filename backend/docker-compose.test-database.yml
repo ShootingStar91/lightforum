@@ -1,0 +1,12 @@
+name: lightforum-test-db
+services:
+  lf-db-test:
+    image: postgres:15.3
+    volumes:
+      - ./database-test/:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=lf-db-test
+    ports:
+      - 5432:5432

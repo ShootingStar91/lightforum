@@ -3,3 +3,4 @@ build
 .env
 database
 database-dev
+database-test
