@@ -57,10 +57,22 @@ describe("Test thread routes", () => {
       );
       expect(found).toBeDefined();
     });
+
     test("Appropriate error message when valid id but thread not found", async () => {
       const editedFields = { title: "Edited title", content: "Edited content" };
       const responseToEdit = await api.put("/threads/801").send(editedFields);
       expect(responseToEdit.status).toBe(400);
     });
+
+    test("Appropriate error message when id is not a number", async () => {
+      const editedFields = { title: "Edited title", content: "Edited content" };
+      const responseToEdit = await api.put("/threads/abc").send(editedFields);
+      expect(responseToEdit.status).toBe(400);
+      const responseObject = JSON.parse(responseToEdit.text) as {
+        message: string;
+      };
+      expect(responseObject.message).toBe("Invalid id");
+    });
+    
   });
 });

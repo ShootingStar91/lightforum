@@ -1,1 +1,1 @@
-DELETE http://localhost:3001/threads/1
+DELETE http://localhost:3001/threads/asd

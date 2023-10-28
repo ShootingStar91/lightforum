@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
 import { createThread, getAllThreads } from "../services/thread.js";
 import { z } from "zod";
-import { bodyValidator } from "../util/middleware.js";
+import { bodyValidator, queryIdValidator } from "../util/middleware.js";
 import Thread from "../models/thread.js";
 import Post from "../models/post.js";
 
@@ -54,6 +54,7 @@ router.post(
 // Edit thread (title or forumId)
 router.put(
   "/:id",
+  queryIdValidator,
   bodyValidator(ThreadEditSchema),
   async (req: Request<{id: string}, object, ThreadFields>, res: Response) => {
     const id = parseInt(req.params.id);
@@ -62,13 +63,12 @@ router.put(
     if (amountEdited > 0) {
       return res.status(200).send();
     }
-    console.log("sending 400 from edit thread");
-    return res.status(400).send();
+    return res.status(400).json({ message: "Thread with given id not found" });
   }
 );
 
 // Delete thread
-router.delete("/:id", async (req: Request<{id: string}, object, object>, res: Response) => {
+router.delete("/:id", queryIdValidator, async (req: Request<{id: string}, object, object>, res: Response) => {
   const id = parseInt(req.params.id);
   const thread = await Thread.findByPk(id);
   if (!thread) return res.status(400).send();
