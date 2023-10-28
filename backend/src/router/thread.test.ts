@@ -45,15 +45,22 @@ describe("Test thread routes", () => {
     );
   });
 
-  test("Edit thread works", async () => {
-    const editedFields = { title: "Edited title", content: "Edited content" };
-    const responseToEdit = await api.put("/threads/1").send(editedFields);
-    expect(responseToEdit.status).toBe(200);
-    const allThreadsResponse = await api.get("/threads/");
-    const allThreads = JSON.parse(allThreadsResponse.text) as [Thread];
-    const found = allThreads.some((thread) =>
-      expect(thread).toEqual(expect.objectContaining(editedFields))
-    );
-    expect(found).toBeDefined();
+  describe("Edit route tests", () => {
+    test("Edit thread works", async () => {
+      const editedFields = { title: "Edited title", content: "Edited content" };
+      const responseToEdit = await api.put("/threads/1").send(editedFields);
+      expect(responseToEdit.status).toBe(200);
+      const allThreadsResponse = await api.get("/threads/");
+      const allThreads = JSON.parse(allThreadsResponse.text) as [Thread];
+      const found = allThreads.some((thread) =>
+        expect(thread).toEqual(expect.objectContaining(editedFields))
+      );
+      expect(found).toBeDefined();
+    });
+    test("Appropriate error message when valid id but thread not found", async () => {
+      const editedFields = { title: "Edited title", content: "Edited content" };
+      const responseToEdit = await api.put("/threads/801").send(editedFields);
+      expect(responseToEdit.status).toBe(400);
+    });
   });
 });

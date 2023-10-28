@@ -1,4 +1,4 @@
-PUT http://localhost:3001/threads/1
+PUT http://localhost:3001/threads/67
 Content-Type: application/json
 
 {

@@ -58,9 +58,9 @@ router.put(
   async (req: Request<{id: string}, object, ThreadFields>, res: Response) => {
     const id = parseInt(req.params.id);
     const { title, content } = req.body;
-    const result = await Thread.update({ title, content }, { where: { id } });
-    if (result) {
-      return res.status(200).json(result);
+    const [amountEdited] = await Thread.update({ title, content }, { where: { id } });
+    if (amountEdited > 0) {
+      return res.status(200).send();
     }
     console.log("sending 400 from edit thread");
     return res.status(400).send();
