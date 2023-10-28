@@ -1,6 +1,6 @@
-import { PORT } from "./util/config";
-import { connectToDatabase } from "./util/db";
-import { app } from "./app";
+import { PORT } from "./util/config.js";
+import { connectToDatabase } from "./util/db.js";
+import { app } from "./app.js";
 
 const start = async () => {
   await connectToDatabase();

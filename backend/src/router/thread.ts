@@ -1,4 +1,4 @@
-import { Request, Router } from "express";
+import { Request, Response, Router } from "express";
 import { createThread, getAllThreads } from "../services/thread.js";
 import { z } from "zod";
 import { bodyValidator } from "../util/middleware.js";
@@ -11,6 +11,13 @@ const ThreadSchema = z.object({
   content: z.string(),
   forumId: z.number(),
   userId: z.number(),
+});
+
+const ThreadEditSchema = z.object({
+  title: z.string().min(2, "Title too short"),
+  content: z.string(),
+  forumId: z.number().optional(),
+  userId: z.number().optional(),
 });
 
 export type ThreadFields = z.infer<typeof ThreadSchema>;
@@ -35,10 +42,9 @@ router.get("/", async (_req, res) => {
 router.post(
   "/",
   bodyValidator(ThreadSchema),
-  async (req: Request<object, object, ThreadFields>, res) => {
+  async (req: Request<object, object, ThreadFields>, res: Response) => {
     const { title, content, forumId, userId } = req.body;
     const result = await createThread({ title, content, forumId, userId });
-    console.log({ result });
     if (result) return res.status(200).json(result);
     return res.status(400).send();
   }
@@ -47,15 +53,15 @@ router.post(
 // Edit thread (title or forumId)
 router.put(
   "/:id",
-  bodyValidator(ThreadSchema),
-  async (req: Request<{id: string}, object, ThreadFields>, res) => {
-    console.log({id: req.params.id });
+  bodyValidator(ThreadEditSchema),
+  async (req: Request<{id: string}, object, ThreadFields>, res: Response) => {
     const id = parseInt(req.params.id);
     const { title, content } = req.body;
     const result = await Thread.update({ title, content }, { where: { id } });
     if (result) {
       return res.status(200).json(result);
     }
+    console.log("sending 400 from edit thread");
     return res.status(400).send();
   }
 );

@@ -44,6 +44,7 @@ export const bodyValidator =
     console.log("Body: ", req.body);
     const parsed = schema.safeParse(req.body);
     if (!parsed.success) {
+      console.log("sending 400 from bodyvalidator");
       return res.status(400).json(parsed.error);
     }
     console.log("Parse ok");

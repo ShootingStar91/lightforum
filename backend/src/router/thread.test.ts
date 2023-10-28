@@ -28,7 +28,7 @@ const seedTestData = async () => {
   await Post.bulkCreate(testData.posts);
 };
 
-describe("Test post API", () => {
+describe("Test thread routes", () => {
   beforeAll(async () => {
     await connectToDatabase();
   });
@@ -44,4 +44,14 @@ describe("Test post API", () => {
       expect(data[index]).toMatchObject(thread)
     );
   });
+
+  test("Edit thread works", async () => {
+    const editedFields = { title: "Edited title", content: "Edited content" }
+    const responseToEdit = await api.put("/threads/1").send(editedFields);
+    expect(responseToEdit.status).toBe(200)
+    const allThreadsResponse = await api.get("/threads/");
+    const allThreads = JSON.parse(allThreadsResponse.text) as [Thread];
+    const found = allThreads.some(thread => expect(thread).toEqual(expect.objectContaining(editedFields)));
+    expect(found).toBeDefined();
+  })
 });
