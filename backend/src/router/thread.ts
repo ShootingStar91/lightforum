@@ -3,6 +3,7 @@ import { createThread, getAllThreads } from "../services/thread.js";
 import { z } from "zod";
 import { bodyValidator } from "../util/middleware.js";
 import Thread from "../models/thread.js";
+import Post from "../models/post.js";
 
 const router = Router();
 
@@ -67,5 +68,15 @@ router.put(
 );
 
 // Delete thread
+router.delete("/:id", async (req: Request<{id: string}, object, object>, res: Response) => {
+  const id = parseInt(req.params.id);
+  const thread = await Thread.findByPk(id);
+  if (!thread) return res.status(400).send();
+  const postDeletion = await Post.destroy({ where: { threadId: id } });
+  if (!postDeletion) return res.status(400).json({ message: "Found thread, but could not delete posts or thread" });
+  const threadDeletion = await Thread.destroy({ where: { id } });
+  if (!threadDeletion) return res.status(400).json({ message: "Deleted posts, but could not delete thread" });
+  return res.status(200).send();
+});
 
 export default router;
