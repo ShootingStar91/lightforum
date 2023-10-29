@@ -25,7 +25,6 @@ export const testData = {
   ],
   posts: [
     {
-      title: "Test response 1",
       content: "Hi there, I agree.",
       threadId: 1,
       userId: 2,

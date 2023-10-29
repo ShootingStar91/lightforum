@@ -56,9 +56,8 @@ export const queryIdValidator = (
   res: Response,
   next: NextFunction
 ) => {
-  console.log({ id: req.params.id });
   if (
-    req.query?.id &&
+    req.params?.id &&
     typeof req.params.id === "string" &&
     !isNaN(parseInt(req.params.id))
   ) {

@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { createThread, getAllThreads } from "../services/thread.js";
+import { createThread, getAllThreads, getThread } from "../services/thread.js";
 import { z } from "zod";
 import { bodyValidator, queryIdValidator } from "../util/middleware.js";
 import Thread from "../models/thread.js";
@@ -24,14 +24,11 @@ const ThreadEditSchema = z.object({
 export type ThreadFields = z.infer<typeof ThreadSchema>;
 
 // Get single thread and it's posts
-// router.get("/:id", queryIdValidator, async (req, res) => {
-//   const topicId = parseInt(req.query.id as string);
-//   const result = await getFullTopic(topicId);
-//   if (result) {
-//     return res.status(200).json(result);
-//   }
-//   return res.status(404).send();
-// });
+router.get("/:id", queryIdValidator, async (req, res) => {
+  const topicId = parseInt(req.params.id);
+  const result = await getThread(topicId);
+  return res.status(200).json(result);
+});
 
 // Get all threads (without posts)
 router.get("/", async (_req, res) => {

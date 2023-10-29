@@ -1,32 +1,12 @@
 import supertest from "supertest";
 import { app } from "../app.js";
 import { describe, test, expect } from "@jest/globals";
-import Forum from "../models/forum.js";
-import Post from "../models/post.js";
-import User from "../models/user.js";
 import { connectToDatabase } from "../util/db.js";
 import { testData } from "../testData.js";
 import Thread from "../models/thread.js";
+import { seedTestData } from "../testUtils/seedTestData.js";
 
 const api = supertest(app);
-
-const destroyOptions = {
-  where: {},
-  truncate: true,
-  cascade: true,
-  restartIdentity: true,
-};
-
-const seedTestData = async () => {
-  await Post.destroy(destroyOptions);
-  await Thread.destroy(destroyOptions);
-  await User.destroy(destroyOptions);
-  await Forum.destroy(destroyOptions);
-  await User.bulkCreate(testData.users);
-  await Forum.bulkCreate(testData.forums);
-  await Thread.bulkCreate(testData.threads);
-  await Post.bulkCreate(testData.posts);
-};
 
 describe("Test thread routes", () => {
   beforeAll(async () => {
@@ -34,15 +14,6 @@ describe("Test thread routes", () => {
   });
   beforeEach(async () => {
     await seedTestData();
-  });
-
-  test("Test data exists in database", async () => {
-    const response = await api.get("/threads/");
-    expect(response.statusCode).toBe(200);
-    const data = JSON.parse(response.text) as typeof testData.threads;
-    testData.threads.forEach((thread, index) =>
-      expect(data[index]).toMatchObject(thread)
-    );
   });
 
   describe("Edit route tests", () => {
@@ -73,6 +44,29 @@ describe("Test thread routes", () => {
       };
       expect(responseObject.message).toBe("Invalid id");
     });
-    
+  });
+
+  describe("Getting threads routes tests", () => {
+    test("Getting all threads returns test data", async () => {
+      const response = await api.get("/threads/");
+      expect(response.statusCode).toBe(200);
+      const data = JSON.parse(response.text) as typeof testData.threads;
+      testData.threads.forEach((thread, index) =>
+        expect(data[index]).toMatchObject(thread)
+      );
+    });
+
+    test("Getting single thread works", async () => {
+      type ResponseType = {
+        thread: (typeof testData.threads)[0];
+        posts: [(typeof testData.posts)[0]];
+      };
+      const id = 1;
+      const response = await api.get(`/threads/${id}`);
+      expect(response.statusCode).toBe(200);
+      const data = JSON.parse(response.text) as ResponseType;
+      expect(data.thread).toMatchObject(testData.threads[0]);
+      testData.posts.forEach(post => expect(data.posts).toEqual(expect.arrayContaining([expect.objectContaining(post)])));
+    });
   });
 });
