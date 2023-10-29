@@ -4,6 +4,7 @@ import { z } from "zod";
 import { bodyValidator, queryIdValidator } from "../util/middleware.js";
 import Thread from "../models/thread.js";
 import Post from "../models/post.js";
+import { NotFoundError } from "../util/errorTypes.js";
 
 const router = Router();
 
@@ -23,20 +24,17 @@ const ThreadEditSchema = z.object({
 
 export type ThreadFields = z.infer<typeof ThreadSchema>;
 
-// Get single thread and it's posts
 router.get("/:id", queryIdValidator, async (req, res) => {
   const topicId = parseInt(req.params.id);
   const result = await getThread(topicId);
   return res.status(200).json(result);
 });
 
-// Get all threads (without posts)
 router.get("/", async (_req, res) => {
   const threads = await getAllThreads();
   return res.status(200).json(threads);
 });
 
-// Create thread
 router.post(
   "/",
   bodyValidator(ThreadSchema),
@@ -44,11 +42,10 @@ router.post(
     const { title, content, forumId, userId } = req.body;
     const result = await createThread({ title, content, forumId, userId });
     if (result) return res.status(200).json(result);
-    return res.status(400).send();
+    throw new NotFoundError();
   }
 );
 
-// Edit thread (title or forumId)
 router.put(
   "/:id",
   queryIdValidator,
@@ -60,19 +57,16 @@ router.put(
     if (amountEdited > 0) {
       return res.status(200).send();
     }
-    return res.status(400).json({ message: "Thread with given id not found" });
+    throw new NotFoundError();
   }
 );
 
-// Delete thread
 router.delete("/:id", queryIdValidator, async (req: Request<{id: string}, object, object>, res: Response) => {
   const id = parseInt(req.params.id);
   const thread = await Thread.findByPk(id);
-  if (!thread) return res.status(400).send();
-  const postDeletion = await Post.destroy({ where: { threadId: id } });
-  if (!postDeletion) return res.status(400).json({ message: "Found thread, but could not delete posts or thread" });
-  const threadDeletion = await Thread.destroy({ where: { id } });
-  if (!threadDeletion) return res.status(400).json({ message: "Deleted posts, but could not delete thread" });
+  if (!thread) throw new NotFoundError();
+  await Post.destroy({ where: { threadId: id } });
+  await Thread.destroy({ where: { id } });
   return res.status(200).send();
 });
 

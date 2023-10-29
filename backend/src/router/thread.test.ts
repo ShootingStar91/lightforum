@@ -32,7 +32,7 @@ describe("Test thread routes", () => {
     test("Appropriate error message when valid id but thread not found", async () => {
       const editedFields = { title: "Edited title", content: "Edited content" };
       const responseToEdit = await api.put("/threads/801").send(editedFields);
-      expect(responseToEdit.status).toBe(400);
+      expect(responseToEdit.status).toBe(404);
     });
 
     test("Appropriate error message when id is not a number", async () => {
