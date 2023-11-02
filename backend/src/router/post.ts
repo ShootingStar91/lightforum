@@ -20,7 +20,6 @@ router.post("/new", bodyValidator(PostSchema), async (req: Request<object, objec
   const content = req.body.content;
   const threadId = parseInt(req.body.threadId);
   const result = await createPost(req.user.id, threadId, content);
-  if (!result) return res.status(400).send();
   return res.json(result);
 });
 
