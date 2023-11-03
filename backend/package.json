@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "IS_TEST=true TEST_POSTGRES_USER=postgres TEST_POSTGRES_PASSWORD=postgres TEST_POSTGRES_PORT=5432 TEST_POSTGRES_CONTAINER=localhost TEST_POSTGRES_DB=lf-db-test jest --runInBand",
+    "test": "IS_TEST=true TEST_POSTGRES_USER=postgres TEST_POSTGRES_PASSWORD=postgres TEST_POSTGRES_PORT=5432 TEST_POSTGRES_CONTAINER=localhost TEST_POSTGRES_DB=lf-db-test jest --runInBand --silent ./src/",
     "build": "tsc",
     "start": "node --es-module-specifier-resolution=node build/index.js",
     "dev:docker": "npx tsx watch src/",

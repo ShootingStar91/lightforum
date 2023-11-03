@@ -46,5 +46,14 @@ describe("Test forum routes", () => {
     expect(result).not.toContainEqual(expect.objectContaining(testData.forums[0]));
   });
 
+  test("Deleting a forum works", async ()=> {
+    const deleteResponse = await api.delete("/forums/delete/1");
+    expect(deleteResponse.status).toBe(200);
+    const result = await api.get("/forums/");
+    expect(result.status).toBe(200);
+    const data = JSON.parse(result.text) as typeof testData.forums;
+    expect(data).not.toContainEqual(expect.objectContaining(testData.forums[0]));
+  });
+
 });
 

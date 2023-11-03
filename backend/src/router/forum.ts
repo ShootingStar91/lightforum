@@ -1,8 +1,9 @@
 import { Request, Router } from "express";
 import "express-async-errors";
-import { Forum } from "../models/index.js";
+import { Forum, Thread } from "../models/index.js";
 import { bodyValidator, queryIdValidator } from "../util/middleware.js";
 import { z } from "zod";
+import { deleteThread } from "../services/thread.js";
 
 const router = Router();
 
@@ -42,10 +43,21 @@ router.put(
   }
 );
 
-router.delete("/delete/:id", queryIdValidator, async (req: Request<{ id: string }, object, ForumFields>, res) => {
-  const id = parseInt(req.params.id);
-  await Forum.destroy({ where: { id } });
-  return res.status(200).send();
-});
+router.delete(
+  "/delete/:id",
+  queryIdValidator,
+  async (req: Request<{ id: string }, object, ForumFields>, res) => {
+    const id = parseInt(req.params.id);
+    const threads = await Thread.findAll({
+      where: { forumId: id },
+      attributes: ["id"],
+    });
+    for (const thread of threads) {
+      await deleteThread(thread.id);
+    }
+    await Forum.destroy({ where: { id } });
+    return res.status(200).send();
+  }
+);
 
 export default router;

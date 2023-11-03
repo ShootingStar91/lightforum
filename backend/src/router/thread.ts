@@ -1,9 +1,8 @@
 import { Request, Response, Router } from "express";
-import { createThread, getAllThreads, getThread } from "../services/thread.js";
+import { createThread, deleteThread, getAllThreads, getThread } from "../services/thread.js";
 import { z } from "zod";
 import { bodyValidator, queryIdValidator } from "../util/middleware.js";
 import Thread from "../models/thread.js";
-import Post from "../models/post.js";
 import { NotFoundError } from "../util/errorTypes.js";
 
 const router = Router();
@@ -65,8 +64,7 @@ router.delete("/:id", queryIdValidator, async (req: Request<{id: string}, object
   const id = parseInt(req.params.id);
   const thread = await Thread.findByPk(id);
   if (!thread) throw new NotFoundError();
-  await Post.destroy({ where: { threadId: id } });
-  await Thread.destroy({ where: { id } });
+  await deleteThread(id);
   return res.status(200).send();
 });
 

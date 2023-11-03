@@ -16,3 +16,8 @@ export const getThread = async (id: number) => {
   const posts = await Post.findAll({ where: { threadId: id }});
   return { thread, posts };
 };
+
+export const deleteThread = async (id: number) => {
+  await Post.destroy({ where: { threadId: id } });
+  await Thread.destroy({ where: { id } });
+};
