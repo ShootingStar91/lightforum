@@ -13,6 +13,11 @@ const ForumSchema = z.object({
 
 type ForumFields = z.infer<typeof ForumSchema>;
 
+router.get("/", async (_req, res) => {
+  const forums = await Forum.findAll({});
+  res.status(200).json(forums);
+});
+
 router.post(
   "/new",
   bodyValidator(ForumSchema),

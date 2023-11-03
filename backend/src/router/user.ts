@@ -2,6 +2,7 @@ import { Router, Request } from "express";
 import { createUser, tryLogin } from "../services/user.js";
 import { z } from "zod";
 import { bodyValidator } from "../util/middleware.js";
+import { NotFoundError } from "../util/errorTypes.js";
 
 const router = Router();
 
@@ -30,7 +31,7 @@ router.post(
     const username = req.body.username;
     const password = req.body.password;
     const result = await tryLogin(username, password);
-    if (!result) return res.status(400).send();
+    if (!result) throw new NotFoundError("Login not successful");
     return res.json(result);
   }
 );

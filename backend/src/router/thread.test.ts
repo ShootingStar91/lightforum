@@ -3,7 +3,7 @@ import { app } from "../app.js";
 import { describe, test, expect } from "@jest/globals";
 import { connectToDatabase } from "../util/db.js";
 import { testData } from "../testData.js";
-import Thread from "../models/thread.js";
+import { Thread } from "../models/index.js";
 import { seedTestData } from "../testUtils/seedTestData.js";
 
 const api = supertest(app);
@@ -58,8 +58,8 @@ describe("Test thread routes", () => {
 
     test("Getting single thread works", async () => {
       type ResponseType = {
-        thread: (typeof testData.threads)[0];
-        posts: [(typeof testData.posts)[0]];
+        thread: (typeof testData.threads[0]);
+        posts: [(typeof testData.posts[0])];
       };
       const id = 1;
       const response = await api.get(`/threads/${id}`);
