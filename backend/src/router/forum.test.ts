@@ -1,7 +1,7 @@
 import supertest from "supertest";
 import { app } from "../app.js";
 import { describe } from "@jest/globals";
-import { connectToDatabase } from "../util/db.js";
+import { connectToDatabase, disconnectFromDatabase } from "../util/db.js";
 import { Forum } from "../models/index.js";
 import { seedTestData } from "../testUtils/seedTestData.js";
 import { testData } from "../testData.js";
@@ -14,6 +14,10 @@ describe("Test forum routes", () => {
   });
   beforeEach(async () => {
     await seedTestData();
+  });
+
+  afterAll(async () => {
+    await disconnectFromDatabase();
   });
 
   test("Get route returns test data forums", async () => {

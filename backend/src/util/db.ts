@@ -35,4 +35,12 @@ const connectToDatabase = async () => {
   return null;
 };
 
-export { connectToDatabase, sequelize };
+const disconnectFromDatabase = async () => {
+  try {
+    await sequelize.close();
+  } catch (e) {
+    console.log("Disconnecting from database failed", { e });
+  }
+};
+
+export { connectToDatabase, disconnectFromDatabase, sequelize };

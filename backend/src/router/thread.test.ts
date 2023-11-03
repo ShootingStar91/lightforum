@@ -1,7 +1,7 @@
 import supertest from "supertest";
 import { app } from "../app.js";
 import { describe, test, expect } from "@jest/globals";
-import { connectToDatabase } from "../util/db.js";
+import { connectToDatabase, disconnectFromDatabase } from "../util/db.js";
 import { testData } from "../testData.js";
 import { Thread } from "../models/index.js";
 import { seedTestData } from "../testUtils/seedTestData.js";
@@ -14,6 +14,10 @@ describe("Test thread routes", () => {
   });
   beforeEach(async () => {
     await seedTestData();
+  });
+
+  afterAll(async () => {
+    await disconnectFromDatabase();
   });
 
   describe("Edit route tests", () => {
