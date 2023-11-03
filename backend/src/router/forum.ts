@@ -31,18 +31,19 @@ router.post(
 
 router.put(
   "/edit/:id",
+  queryIdValidator,
   bodyValidator(ForumSchema),
-  async (req: Request<object, object, ForumFields>, res) => {
+  async (req: Request<{ id: string }, object, ForumFields>, res) => {
     const title = req.body.title;
     const description = req.body.description;
-    const id = parseInt(req.query.id as string);
+    const id = parseInt(req.params.id);
     await Forum.update({ title, description }, { where: { id: id } });
     res.status(200).send();
   }
 );
 
-router.delete("/delete/:id", queryIdValidator, async (req, res) => {
-  const id = parseInt(req.query.id as string);
+router.delete("/delete/:id", queryIdValidator, async (req: Request<{ id: string }, object, ForumFields>, res) => {
+  const id = parseInt(req.params.id);
   await Forum.destroy({ where: { id } });
   return res.status(200).send();
 });

@@ -32,5 +32,15 @@ describe("Test forum routes", () => {
     expect(result).toContainEqual(expect.objectContaining(fakeForum));
   });
 
+  test("Editing a forum works", async () => {
+    const editedFields = { title: "Edited forum title 1", description: "Edited this for testing." };
+    const editResult = await api.put("/forums/edit/1").send(editedFields);
+    expect(editResult.status).toBe(200);
+    const response = await api.get("/forums/");
+    const result = JSON.parse(response.text) as Forum[];
+    expect(result).toContainEqual(expect.objectContaining(editedFields));
+    expect(result).not.toContainEqual(expect.objectContaining(testData.forums[0]));
+  });
+
 });
 
