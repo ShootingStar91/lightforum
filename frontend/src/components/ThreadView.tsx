@@ -2,6 +2,7 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router";
 import { getThread } from "../api";
 import { useForumContext } from "../App";
+import { PostForm } from "./PostForm";
 
 const getTimeStamp = () =>
   new Date().toLocaleDateString() + " at " + new Date().toLocaleTimeString();
@@ -22,6 +23,7 @@ export const ThreadView = () => {
           <Post post={post} />
         ))}
       </div>
+      <PostForm />
     </div>
   );
 };
