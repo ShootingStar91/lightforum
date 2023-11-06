@@ -4,8 +4,8 @@ import { getThread } from "../api";
 import { useForumContext } from "../App";
 import { PostForm } from "./PostForm";
 
-const getTimeStamp = () =>
-  new Date().toLocaleDateString() + " at " + new Date().toLocaleTimeString();
+const getTimeStamp = (time: Date) =>
+  new Date(time).toLocaleDateString() + " at " + new Date(time).toLocaleTimeString();
 
 export const ThreadView = () => {
   const { threadId } = useParams();
@@ -23,7 +23,7 @@ export const ThreadView = () => {
           <Post post={post} />
         ))}
       </div>
-      <PostForm />
+      <PostForm threadId={id} />
     </div>
   );
 };
@@ -38,7 +38,7 @@ const MainPost = ({ thread }: { thread: any }) => {
     <div className="bg-sky-200 mt-16">
       <div className="relative text-white bg-sky-400 flex p-2 pl-8">
         <div className="font-bold">{thread.title}</div>
-        <div className="absolute pr-4 right-0">{getTimeStamp()}</div>
+        <div className="absolute pr-4 right-0">{getTimeStamp(thread.createdAt)}</div>
       </div>
       <p className="p-8">{thread.content}</p>
       <div className="font-bold text-slate-500 pl-8 pb-4">{username}</div>
@@ -52,7 +52,7 @@ const Post = ({ post }: { post: any }) => {
       <p className="p-4 pl-8">{post.content}</p>
       <div className="relative font-bold text-slate-500 pl-8 flex">
         <div>{post.userId}</div>
-        <div className="absolute right-0 pr-4">{getTimeStamp()}</div>
+        <div className="absolute right-0 pr-4">{getTimeStamp(post.createdAt)}</div>
       </div>
     </div>
   );
