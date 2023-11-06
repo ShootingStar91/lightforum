@@ -1,0 +1,7 @@
+POST http://localhost:3001/forums/new
+content-type: application/json
+
+{
+    "title": "General discussion",
+    "description": "Everything!"
+}

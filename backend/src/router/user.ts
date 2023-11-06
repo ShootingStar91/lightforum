@@ -3,6 +3,7 @@ import { createUser, tryLogin } from "../services/user.js";
 import { z } from "zod";
 import { bodyValidator } from "../util/middleware.js";
 import { NotFoundError } from "../util/errorTypes.js";
+import User from "../models/user.js";
 
 const router = Router();
 
@@ -12,6 +13,11 @@ const UserSchema = z.object({
 });
 
 type UserType = z.infer<typeof UserSchema>;
+
+router.get("/", async (_req, res) => {
+  const result = await User.findAll({ attributes: ["id", "username"] });
+  res.status(200).json(result);
+});
 
 router.post(
   "/create",

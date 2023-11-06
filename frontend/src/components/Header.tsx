@@ -28,7 +28,7 @@ const HeaderRoute = () => {
           &gt; <Link to="/forum">Category</Link>
         </>
       )}
-      {location.pathname.startsWith('/topic/') && <> &gt; Topic title</>}
+      {location.pathname.startsWith('/thread/') && <> &gt; Thread title</>}
     </div>
   );
 };

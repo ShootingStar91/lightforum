@@ -5,9 +5,11 @@ import { errorHandler, logger, userExtractor } from "./util/middleware.js";
 import postRouter from "./router/post.js";
 import forumRouter from "./router/forum.js";
 import threadRouter from "./router/thread.js";
+import cors from 'cors';
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(logger);
 app.use(userExtractor);

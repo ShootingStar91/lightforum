@@ -3,6 +3,6 @@ content-type: application/json
 
 {
     "content": "New post",
-    "userId": "1",
-    "threadId": "1"
+    "userId": 1,
+    "threadId": 1
 }
