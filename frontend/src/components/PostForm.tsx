@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { postMutation } from "../api";
 
-export const PostForm = ({ threadId }: { threadId: number }) => {
+export const PostForm = ({ threadId, title }: { threadId: number, title: string }) => {
   const [text, setText] = useState("");
   const queryClient = useQueryClient();
   const sendMutation = useMutation({ mutationFn: postMutation, onSuccess: () => queryClient.invalidateQueries(['thread', threadId]) });
@@ -15,7 +15,7 @@ export const PostForm = ({ threadId }: { threadId: number }) => {
   return (
     <div className="mt-6 bg-sky-200">
       <div className="bg-sky-400 text-white p-2">
-        <div>Reply to thread</div>
+        <div>{title}</div>
       </div>
       <textarea
         onChange={(event) => setText(event.target.value)}
