@@ -20,7 +20,12 @@ export const LoginPage = () => {
         placeholder="password"
       />
       <button>Login</button>
-      <div>If you're new, <Link className="link" to='/register'>click here to register</Link></div>
+      <div>
+        If you're new,{" "}
+        <Link className="link" to="/register">
+          click here to register
+        </Link>
+      </div>
     </div>
   );
 };

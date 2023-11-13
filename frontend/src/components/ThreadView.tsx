@@ -21,9 +21,9 @@ export const ThreadView = () => {
     <div className="mx-auto w-[80%]">
       <MainPost thread={thread} />
       <div className="mt-8">
-      {posts.map((post) => (
-        <Post post={post} />
-      ))}
+        {posts.map((post) => (
+          <Post post={post} />
+        ))}
       </div>
       <PostForm threadId={id} title="Reply to thread" />
     </div>

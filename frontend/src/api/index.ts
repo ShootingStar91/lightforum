@@ -39,7 +39,19 @@ export const getUsers = async () => {
   return null;
 };
 
-export const postMutation = async (post: { content: string, userId: number, threadId: number}) => {
+export const postMutation = async (post: {
+  content: string;
+  userId: number;
+  threadId: number;
+}) => {
   const response = await axios.post(`${baseUrl}/posts/new`, post);
   console.log({ response });
+};
+
+export const newForum = async (forum: {
+  title: string;
+  description: string;
+}) => {
+  const response = await axios.post(`${baseUrl}/forums/new`, forum);
+  console.log({ response })
 };

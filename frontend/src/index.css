@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .main-div {
-    @apply bg-gradient-to-b from-sky-100 to-white
+    @apply bg-sky-100
 }
 
 .link {

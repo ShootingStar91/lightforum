@@ -13,6 +13,12 @@ export const ForumView = () => {
         {forums.map(({ description, title, id }) => (
           <Category title={title} description={description} forumId={id} />
         ))}
+        <Link
+          to="/add_forum/"
+          className="hover:bg-sky-200 font-bold bg-sky-400 mt-8"
+        >
+          Add forum
+        </Link>
       </div>
     </div>
   );

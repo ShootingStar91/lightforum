@@ -2,10 +2,19 @@ import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { postMutation } from "../api";
 
-export const PostForm = ({ threadId, title }: { threadId: number, title: string }) => {
+export const PostForm = ({
+  threadId,
+  title,
+}: {
+  threadId: number;
+  title: string;
+}) => {
   const [text, setText] = useState("");
   const queryClient = useQueryClient();
-  const sendMutation = useMutation({ mutationFn: postMutation, onSuccess: () => queryClient.invalidateQueries(['thread', threadId]) });
+  const sendMutation = useMutation({
+    mutationFn: postMutation,
+    onSuccess: () => queryClient.invalidateQueries(["thread", threadId]),
+  });
 
   const sendPost = () => {
     sendMutation.mutate({ content: text, threadId, userId: 1 });

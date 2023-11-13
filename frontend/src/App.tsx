@@ -10,6 +10,7 @@ import { useQuery } from "react-query";
 import { createContext, useContext } from "react";
 import { getForums, getThreads, getUsers } from "./api";
 import { ForumType, ThreadType, UserType } from "./types";
+import { AddForum } from "./components/AddForum";
 
 export const ForumContext = createContext({
   forums: null,
@@ -48,6 +49,7 @@ const App = () => {
                 <Route path="thread">
                   <Route path=":threadId" element={<ThreadView />} />
                 </Route>
+                <Route path="/add_forum" element={<AddForum />} />
                 <Route path="/login" element={<LoginPage />} />
               </Routes>
             </div>
