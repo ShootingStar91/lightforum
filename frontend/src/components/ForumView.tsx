@@ -11,7 +11,12 @@ export const ForumView = () => {
       <h1>Forum categories</h1>
       <div className="mx-auto flex flex-col w-[600px]">
         {forums.map(({ description, title, id }) => (
-          <Category title={title} description={description} forumId={id} />
+          <Category
+            key={id}
+            title={title}
+            description={description}
+            forumId={id}
+          />
         ))}
         <Link
           to="/add_forum/"
@@ -34,19 +39,26 @@ const Category = ({
   forumId: number;
 }) => {
   const { threads } = useForumContext();
-
   if (!threads) return <p>Loading...</p>;
-
+  const threadsOfForum = threads.filter((thread) => thread.forumId === forumId);
   return (
-    <div className="border-1 border-slate-200 mt-4 text-slate-700">
-      <div className="bg-sky-200 p-1 px-2 font-bold">
-        {title}: {description}
+    <div
+      className="border-2 border-sky-200 mt-4 text-slate-700"
+      key={forumId}
+    >
+      <div className="bg-sky-200 p-1 px-2">
+        <div className="font-bold text-lg">{title}</div>
+        <div className="text-slate-500">{description}</div>
       </div>
-      {threads
-        .filter((thread) => thread.forumId === forumId)
-        .map((thread, index) => (
-          <Thread thread={thread} index={index} />
-        ))}
+      {!threadsOfForum.length ? (
+        <div className="w-full px-2">
+          No threads in this category yet
+        </div>
+      ) : (
+        threadsOfForum.map((thread, index) => (
+          <Thread key={index} thread={thread} index={index} />
+        ))
+      )}
     </div>
   );
 };
@@ -56,6 +68,7 @@ const Thread = ({ thread, index }: { thread: any; index: number }) => {
   const className = "w-full hover:bg-sky-200 hover:text-black px-2 " + color;
   return (
     <Link
+      key={index}
       className={className}
       style={{ display: "inline-block" }}
       to={`/thread/${thread.id}`}
