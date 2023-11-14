@@ -14,8 +14,8 @@ export const AddForum = () => {
   const mutation = useMutation({
     mutationFn: newForum,
     onSuccess: () => {
-      navigate('/forum')
-      return queryClient.invalidateQueries(["forums"])
+      navigate("/forum");
+      return queryClient.invalidateQueries(["forums"]);
     },
   });
 

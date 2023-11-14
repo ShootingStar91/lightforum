@@ -55,3 +55,16 @@ export const newForum = async (forum: {
   const response = await axios.post(`${baseUrl}/forums/new`, forum);
   console.log({ response })
 };
+
+export const newThread = async (thread: {
+  title: string;
+  content: string;
+  forumId: number;
+  userId: number;
+}) => {
+  console.log("sending: ", thread)
+  const response = await axios.post(`${baseUrl}/threads/`, thread);
+  console.log({ response })
+  if (response?.data) return response.data
+  return null
+}

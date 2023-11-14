@@ -11,6 +11,7 @@ import { createContext, useContext } from "react";
 import { getForums, getThreads, getUsers } from "./api";
 import { ForumType, ThreadType, UserType } from "./types";
 import { AddForum } from "./components/AddForum";
+import { NewThread } from "./components/NewThread";
 
 export const ForumContext = createContext({
   forums: null,
@@ -45,7 +46,11 @@ const App = () => {
             <div className="p-4 min-h-[600px]">
               <Routes>
                 <Route path="/" element={<FrontPage />} />
-                <Route path="forum" element={<ForumView />}></Route>
+                <Route path="forum" element={<ForumView />}>
+                  <Route path=":forumId">
+                  </Route>
+                </Route>
+                <Route path="new_thread/:forumId" element={<NewThread />} />
                 <Route path="thread">
                   <Route path=":threadId" element={<ThreadView />} />
                 </Route>

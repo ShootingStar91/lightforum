@@ -42,18 +42,18 @@ const Category = ({
   if (!threads) return <p>Loading...</p>;
   const threadsOfForum = threads.filter((thread) => thread.forumId === forumId);
   return (
-    <div
-      className="border-2 border-sky-200 mt-4 text-slate-700"
-      key={forumId}
-    >
+    <div className="border-2 border-sky-200 mt-4 text-slate-700" key={forumId}>
       <div className="bg-sky-200 p-1 px-2">
-        <div className="font-bold text-lg">{title}</div>
+        <div className="flex flex-row justify-between">
+          <div className="font-bold text-lg">{title}</div>
+          <div className="my-auto text-sky-700 hover:text-sky-300 underline">
+            <Link to={`/new_thread/${forumId}`}>Post a new thread</Link>
+          </div>
+        </div>
         <div className="text-slate-500">{description}</div>
       </div>
       {!threadsOfForum.length ? (
-        <div className="w-full px-2">
-          No threads in this category yet
-        </div>
+        <div className="w-full px-2">No threads in this category yet</div>
       ) : (
         threadsOfForum.map((thread, index) => (
           <Thread key={index} thread={thread} index={index} />
