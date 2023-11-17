@@ -5,9 +5,9 @@ import { useForumContext } from "../App";
 import { PostForm } from "./PostForm";
 
 const getTimeStamp = (time: Date) =>
-  new Date(time).toLocaleDateString() +
+  new Date(time).toLocaleDateString('FI-fi') +
   " at " +
-  new Date(time).toLocaleTimeString();
+  new Date(time).toLocaleTimeString('FI-fi');
 
 export const ThreadView = () => {
   const { threadId } = useParams();

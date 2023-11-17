@@ -12,6 +12,7 @@ import { getForums, getThreads, getUsers } from "./api";
 import { ForumType, ThreadType, UserType } from "./types";
 import { AddForum } from "./components/AddForum";
 import { NewThread } from "./components/NewThread";
+import { RegisterPage } from "./components/RegisterPage";
 
 export const ForumContext = createContext({
   forums: null,
@@ -21,6 +22,7 @@ export const ForumContext = createContext({
   forums: null | undefined | [ForumType];
   users: null | undefined | [UserType];
   threads: null | undefined | [ThreadType];
+  user: null | undefined | UserType;
 });
 
 export const useForumContext = () => useContext(ForumContext);
@@ -29,11 +31,12 @@ const App = () => {
   const { data: forums } = useQuery("forums", getForums);
   const { data: users } = useQuery("users", getUsers);
   const { data: threads } = useQuery("threads", getThreads);
-
+  const user = null // { id: 1, username: "Test user" }
   const forumContext = {
     forums,
     users,
     threads,
+    user,
   };
 
   return (
@@ -55,6 +58,7 @@ const App = () => {
                 </Route>
                 <Route path="/add_forum" element={<AddForum />} />
                 <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
               </Routes>
             </div>
           </div>
