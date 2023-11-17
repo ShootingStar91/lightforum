@@ -1,4 +1,4 @@
-import { Post, Thread, User, Forum } from "../models";
+import { Post, Thread, User, Forum } from "../models/index.js";
 import { testData } from "../testData.js";
 
 const destroyOptions = {

@@ -1,7 +1,10 @@
 import { Request, Router } from "express";
 import "express-async-errors";
 import { Forum, Thread } from "../models/index.js";
-import { bodyValidator, queryIdValidator } from "../util/middleware.js";
+import {
+  bodyValidator,
+  queryIdValidator,
+} from "../util/middlewares/validators/index.js";
 import { z } from "zod";
 import { deleteThread } from "../services/thread.js";
 

@@ -4,7 +4,7 @@ dotenv.config();
 export const PORT = process.env.PORT as string;
 
 const IS_TEST = (process.env.IS_TEST as string) === "true";
-
+export const IS_PRODUCTION = (process.env.PRODUCTION as string) === "true";
 const POSTGRES_USER = IS_TEST
   ? (process.env.TEST_POSTGRES_USER as string)
   : (process.env.POSTGRES_USER as string);

@@ -1,9 +1,9 @@
 import { Router, Request } from "express";
 import { createUser, tryLogin } from "../services/user.js";
 import { z } from "zod";
-import { bodyValidator } from "../util/middleware.js";
 import { NotFoundError } from "../util/errorTypes.js";
 import User from "../models/user.js";
+import { bodyValidator } from "../util/middlewares/validators/index.js";
 
 const router = Router();
 

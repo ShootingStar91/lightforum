@@ -3,7 +3,7 @@ import {
   createPost,
 } from "../services/post.js";
 import { z } from "zod";
-import { bodyValidator } from "../util/middleware.js";
+import { bodyValidator } from "../util/middlewares/validators/index.js";
 
 const router = Router();
 

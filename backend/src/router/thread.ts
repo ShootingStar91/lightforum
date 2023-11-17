@@ -1,9 +1,9 @@
 import { Request, Response, Router } from "express";
 import { createThread, deleteThread, getAllThreads, getThread } from "../services/thread.js";
 import { z } from "zod";
-import { bodyValidator, queryIdValidator } from "../util/middleware.js";
 import Thread from "../models/thread.js";
 import { NotFoundError } from "../util/errorTypes.js";
+import { bodyValidator, queryIdValidator } from "../util/middlewares/validators/index.js";
 
 const router = Router();
 
