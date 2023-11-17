@@ -53,7 +53,7 @@ export const newForum = async (forum: {
   description: string;
 }) => {
   const response = await axios.post(`${baseUrl}/forums/new`, forum);
-  console.log({ response })
+  console.log({ response });
 };
 
 export const newThread = async (thread: {
@@ -62,9 +62,9 @@ export const newThread = async (thread: {
   forumId: number;
   userId: number;
 }) => {
-  console.log("sending: ", thread)
+  console.log("sending: ", thread);
   const response = await axios.post(`${baseUrl}/threads/`, thread);
-  console.log({ response })
-  if (response?.data) return response.data
-  return null
-}
+  console.log({ response });
+  if (response?.data) return response.data;
+  return null;
+};

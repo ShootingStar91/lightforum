@@ -7,14 +7,14 @@ export const NewThread = () => {
   const { forumId: forumIdParam } = useParams();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const navigate = useNavigate()
-  const queryClient = useQueryClient()
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const sendMutation = useMutation({
     mutationFn: newThread,
     onSuccess: ({ id }) => {
-      navigate(`/thread/${id}`)
-      return queryClient.invalidateQueries(["threads"])
-    }
+      navigate(`/thread/${id}`);
+      return queryClient.invalidateQueries(["threads"]);
+    },
   });
 
   if (!forumIdParam) return null;

@@ -47,8 +47,7 @@ const App = () => {
               <Routes>
                 <Route path="/" element={<FrontPage />} />
                 <Route path="forum" element={<ForumView />}>
-                  <Route path=":forumId">
-                  </Route>
+                  <Route path=":forumId"></Route>
                 </Route>
                 <Route path="new_thread/:forumId" element={<NewThread />} />
                 <Route path="thread">

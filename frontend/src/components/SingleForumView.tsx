@@ -1,11 +1,3 @@
-
-
-
-
-
 export const SingleForumView = () => {
-  return <div>Single forum view</div>
-}
-
-
-
+  return <div>Single forum view</div>;
+};

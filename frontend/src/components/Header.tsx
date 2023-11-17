@@ -22,7 +22,7 @@ const HeaderRoute = () => {
   return (
     <div className="my-auto pl-2 font-bold">
       <Link to="/">Lightforum</Link>{" "}
-      {location.pathname !== '/' && (
+      {location.pathname !== "/" && (
         <>
           {" "}
           &gt; <Link to="/forum">Category</Link>
