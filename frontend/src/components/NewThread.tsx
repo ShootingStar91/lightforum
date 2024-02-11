@@ -18,6 +18,7 @@ export const NewThread = () => {
   });
 
   if (!forumIdParam) return null;
+
   const forumId = parseInt(forumIdParam);
 
   const send = () => {

@@ -1,10 +1,22 @@
 import "./loginpage.css";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useMutation, useQueryClient } from "react-query";
+import { tryLogin } from "../api/index";
 
 export const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const mutation = useMutation({
+    mutationFn: tryLogin,
+    onSuccess: () => {
+      navigate("/forum");
+    }
+  })
+  const login = () => {
+    mutation.mutate({ username, password })     
+  }
   return (
     <div className="w-[600px] mx-auto flex flex-col gap-8 items-center p-16">
       <h1>Login</h1>
@@ -22,7 +34,7 @@ export const LoginPage = () => {
         placeholder="password"
         className="text-left p-2"
       />
-      <button>Login</button>
+      <button onClick={login}>Login</button>
       <div>
         If you're new,{" "}
         <Link className="link" to="/register">

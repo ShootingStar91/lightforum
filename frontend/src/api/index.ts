@@ -68,3 +68,13 @@ export const newThread = async (thread: {
   if (response?.data) return response.data;
   return null;
 };
+
+export type LoginInfo = {
+  username: string;
+  password: string;
+}
+
+export const tryLogin = async (loginInfo: LoginInfo) => {
+  const response = await axios.post(`${baseUrl}/users/login`, loginInfo);
+  return response?.data
+}

@@ -18,6 +18,7 @@ export const ForumContext = createContext({
   forums: null,
   users: null,
   threads: null,
+  user: null,
 } as {
   forums: null | undefined | [ForumType];
   users: null | undefined | [UserType];
